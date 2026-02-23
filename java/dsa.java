@@ -1,33 +1,41 @@
-class dsa{
+import java.io.FileWriter;
+import java.io.IOException;
 
-    static class Node{
+class dsa {
+
+    static class Node {
+
         int data;
         Node next;
-        Node(int data){
+
+        Node(int data) {
             this.data = data;
             this.next = null;
         }
     }
-    public static void printNode(Node n){
+
+    public static void printNode(Node n) {
         Node curr = n;
-        while(curr!=null){
-            System.out.print(curr.data+ " -> ");
+        while (curr != null) {
+            System.out.print(curr.data + " -> ");
             curr = curr.next;
         }
         System.out.println("null");
     }
-    public static void printMin(Node n){
+
+    public static void printMin(Node n) {
         int min = n.data;
-        while(n!=null){
-            if(min>n.data){
+        while (n != null) {
+            if (min > n.data) {
                 min = n.data;
             }
-            n=n.next;
+            n = n.next;
         }
         System.out.println(min);
     }
-    public static void deleteNode(Node n){
-        if(n==null || n.next==null){
+
+    public static void deleteNode(Node n) {
+        if (n == null || n.next == null) {
             System.out.println("Can't delete the node");
             return;
         }
@@ -35,7 +43,8 @@ class dsa{
         n.data = temp.data;
         n.next = temp.next;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         Node val1 = new Node(10);
         Node val2 = new Node(20);
         Node val3 = new Node(30);
@@ -49,11 +58,34 @@ class dsa{
 
         val5.next = null;
         Node curr = val1;
-       
 
-        printNode(curr);
-        printMin(curr);
-        deleteNode(val4);
-        printNode(curr);
+        // printNode(curr);
+        // printMin(curr);
+        // deleteNode(val4);
+        // printNode(curr);
+        try {
+
+            FileWriter myObj = new FileWriter("demo.txt"); 
+            myObj.write("Hello World");
+
+            // try (Scanner myReader = new Scanner(myObj)) {
+            //     while (myReader.hasNextLine()) {
+            //         String data = myReader.nextLine();
+            //         System.out.println(data);
+            //     }
+            // } catch (FileNotFoundException e) {
+            //     System.out.println("An error occurred.");
+            //     e.printStackTrace();
+            // }
+            // if (myObj.createNewFile()) {
+            //     System.out.println("File created: " + myObj.getName());
+            // } else {
+            //     System.out.println("File already exists.");
+            // }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+
     }
 }

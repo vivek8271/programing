@@ -81,6 +81,63 @@ void searchNode(struct Node *n, int val)
     }
     printf("Value %d not found\n", val);
 }
+
+// stack using linkedList
+
+struct Stack {
+    struct Node *head;
+    int size;
+};
+
+struct Stack* createNode(){
+    struct Stack* newNode = malloc (sizeof(struct Stack));
+    if(!newNode){
+        printf("Memory allocation failed");
+        exit(1);
+    }
+    newNode->head = NULL;
+    newNode->size = 0;
+    return newNode;
+}
+
+void push(struct Stack* s, int val){
+    struct Node* newNode = malloc (sizeof(struct Node));;
+    newNode->data = val;
+    newNode->next = s->head;
+    s->size++;
+    
+}
+int pop(struct Stack* s){
+    if(s->size == 0){
+        printf("Stack underflow");
+        return 0;
+    }
+    struct Node* popped = s->head;
+    s->head = s->head->next;
+    int poppedValue = popped->data;
+    s->size--;
+    free(popped);
+
+    return poppedValue;
+ 
+}
+
+
+int peek(struct Stack* s){
+    if(s->size == 0){
+        printf("Stack is empty");
+        return 0;
+    }
+    return s->head->data;
+}
+
+int isEmpty(struct Stack* s){
+    return s->size == 0;
+}
+int stackSize(struct Stack* s){
+    return s->size; 
+}
+
 int main()
 {
 
@@ -97,20 +154,38 @@ int main()
 
     struct Node *val6 = node(15);
     // val5->next = NULL;
-    printNode(val1);
-    printMin(val1);
-    // deleteNode(val4);
-    printNode(val1);
-    insertNode(val3, 10, val4);
-    printNode(val1);
-    searchNode(val1, 100);
+    // printNode(val1);
+    // printMin(val1);
+    // // deleteNode(val4);
+    // printNode(val1);
+    // insertNode(val3, 10, val4);
+    // printNode(val1);
+    // searchNode(val1, 100);
 
     free(val1);
     free(val2);
     free(val3);
     free(val4);
     free(val5);
+
+    struct Stack* myStack = createNode();
+    push(myStack, 10);
+    push(myStack, 20);
+    push(myStack, 30);  
+
+    // printf("Top element is %d\n", peek(myStack));
+    printf("Stack size is %d\n", stackSize(myStack));
+    printf("Pop Elements: %d\n", pop(myStack));
+    // printf("Top element is %d\n", peek(myStack));
+    printf("Stack size is %d\n", stackSize(myStack));
+    printf("Empty status: %d\n", isEmpty(myStack));
+    // while(!isEmpty(myStack)){
+    //     printf("%d ", pop(myStack));
+    // }   
+
     printf("\n");
+
+
 
     return 0;
 }
