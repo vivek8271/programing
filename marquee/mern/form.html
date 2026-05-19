@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form</title>
+    <style>
+        form {
+            width: 500px;
+            height: auto;
+            /* margin: 0 auto; */
+            /* padding: 20px; */
+            /* border: 1px solid #ccc; */
+            border-radius: 5px;
+           
+        }
+
+        #form-container {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 align="center">Student login Form</h1>
+    </header>
+    <div id="form-container">
+        <form action="/submit" method="post">
+            <fieldset>
+                <legend>Login</legend>
+
+                <label for="name">Username:</label>
+                <input type="text" id="name" name="Username" required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+
+                <input type="submit" value="Login">
+            </fieldset>
+        </form>
+        <br><br>
+        <form>
+            <fieldset>
+                <legend>Registration</legend>
+
+                <label for="name">Username:</label>
+                <input type="text" id="name" name="Username" required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <label for="dob">DOB:</label>
+                <input type="date" id="dob" name="dob" required><br><br>
+
+                <label for="gender">Gender:</label>
+                <input type="radio" id="male" name="gender" value="male">
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="gender" value="female">
+                <label for="female">Female</label>
+                <br><br>
+                <label for="course">Course:</label>
+                <select id="course" name="course" required>
+                    <option value="" >Select Course</option>
+                    <option value="mern">MERN</option>
+                    <option value="python">Python</option>
+                    <option value="java">Java</option>
+                </select><br><br>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required><br><br>
+
+                <input type="submit" value="Register">
+            </fieldset>
+        </form>
+
+    </div>
+    <form>
+        
+</body>
+
+</html>
