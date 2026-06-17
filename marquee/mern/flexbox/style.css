@@ -1,0 +1,17 @@
+*{
+    margin:0;
+}
+.container{
+    height:500px;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    flex-direction: row-reverse;  
+
+    background-color: rgb(199, 219, 219);
+}
+.container div{
+    width: 100px;
+    height: 100px;
+    background-color: aqua;
+}
