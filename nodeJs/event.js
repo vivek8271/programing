@@ -27,7 +27,7 @@ const fs = require('fs');
 // readableStream.on("error", (err)=>{console.log("Readable Error occured", err)})
 // writableStream.on("error", (err)=>{console.log("Writable Error", err)})
 
-const readableStream = fs.createReadStream("index.txt", { encoding: "utf-8", highWaterMark: 64 * 1024 })
+// const readableStream = fs.createReadStream("index.txt", { encoding: "utf-8", highWaterMark: 64 * 1024 })
 
 // readableStream.on("data", (chunk)=>{
 //     console.log("Length of chunk:",chunk.length)
@@ -49,7 +49,7 @@ const readableStream = fs.createReadStream("index.txt", { encoding: "utf-8", hig
 // })
 
 // Creating a Writable Stream
-const writableStream = fs.createWriteStream("output.txt")
+// const writableStream = fs.createWriteStream("output.txt")
 
 // writableStream.write("vivek");
 // writableStream.write("Kumar");
@@ -93,9 +93,100 @@ const writableStream = fs.createWriteStream("output.txt")
 
 // Chaining  Pipes
 
-const glib = require("zlib");
+// const glib = require("zlib");
 
-fs.createReadStream("index.txt")
-.pipe(glib.createGzip())
-.pipe(fs.createWriteStream("destination.txt.gz")).
-on("finish", () => { console.log("Task Completed") })
+// fs.createReadStream("index.txt")
+// .pipe(glib.createGzip())
+// .pipe(fs.createWriteStream("destination.txt.gz")).
+// on("finish", () => { console.log("Task Completed") })
+
+
+
+        //  Duplex and Transform Streams
+
+// const net = require("net");
+// const server = net.createServer((socket)=>{
+//     socket.on("data", (data)=>{
+//         console.log("Data received from client:", data.toString());
+//         socket.write("Hello from server", data);
+//     })
+
+//     socket.on("end", ()=>{
+//         console.log("Client disconnected");
+//     })
+// })
+// server.listen(8080, ()=>{
+//     console.log("Server listening on port 8080");
+// })
+
+
+        //  Buffer
+
+// const buf = Buffer.from("Hello World");
+// console.log(buf.toString());
+// console.log(buf.toString("hex"));
+// console.log(buf[0]);
+// console.log(buf.length);
+
+// const buf1 = Buffer.alloc(10);
+// console.log(buf1);
+// const buf2 = Buffer.allocUnsafe(10);        // Buffer.allocUnsafe() is faster than Buffer.alloc() but can expose sensitive data. Only use it when you understand the security implications and plan to immediately fill the entire buffer.
+// console.log(buf2);
+
+// buf2.fill(3);
+// console.log(buf2);
+
+
+// const buf3 = Buffer.from([10,2,3,4,5]);
+// console.log(buf3);
+
+// console.log(buf3.toString());
+
+// const buf5 = Buffer.from(buf3);
+
+// console.log(buf5);
+
+const buf6 = Buffer.alloc(11);                  // Create a buffer of size 11 bytes
+buf6.write("hello");
+console.log(buf6.toString());                   // Convert the entire buffer to a string using UTF-8 encoding
+buf6[5]=44;
+buf6[6]=32;
+console.log(buf6);
+buf6.write("Node", 7);                          // Write "Node" starting at index 7
+console.log(buf6.toString());                   // Convert the entire buffer to a string using UTF-8 encoding
+
+console.log(buf6.toString('utf8', 0, 5));       // Convert the first 5 bytes to a string using UTF-8 encoding
+console.log(String.fromCharCode(buf6[0]));      // Convert the first byte to a character using String.fromCharCode
+
+// let str = "";
+// for(const byte of buf6){
+//     str+=String.fromCharCode(byte);
+// }
+
+// console.log(str);
+
+const buf7 = Buffer.from("Hello Worldiuhiuhkhhk");
+
+console.log(Boolean(Buffer.compare(buf6, buf7)));      // Compare buf6 and buf7, returns a negative number if buf6 < buf7, 0 if they are equal, and a positive number if buf6 > buf7
+
+const buf8 = Buffer.alloc(10);
+buf7.copy(buf8);                                       // Copy the contents of buf7 into buf8, starting at the beginning of buf8
+console.log(buf8.toString());
+
+
+const hexbuff = Buffer.from("48656c6c6f20576f726c6421", "hex");  // Create a buffer from a hexadecimal string
+console.log(hexbuff.toString());                   // Convert the buffer to a string using UTF-8 encoding
+
+const base64Buffer = Buffer.from('SGVsbG8=', 'base64');     // Create a buffer from a Base64-encoded string
+console.log(base64Buffer.toString());
+
+const buf9 = Buffer.from("Hello World");
+console.log(buf9.includes("World"));                   // Check if buf9 includes the string "World"
+console.log(buf9.indexOf("World"));                    // Get the index of the first occurrence of "World" in buf9
+console.log(buf9.lastIndexOf("o"));                   // Get the index of the last occurrence of "o" in buf9
+
+    // Buffer AND Stream
+
+const { Transform } = require("stream");
+
+const 
