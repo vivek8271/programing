@@ -165,28 +165,58 @@ console.log(String.fromCharCode(buf6[0]));      // Convert the first byte to a c
 
 // console.log(str);
 
-const buf7 = Buffer.from("Hello Worldiuhiuhkhhk");
+// const buf7 = Buffer.from("Hello Worldiuhiuhkhhk");
 
-console.log(Boolean(Buffer.compare(buf6, buf7)));      // Compare buf6 and buf7, returns a negative number if buf6 < buf7, 0 if they are equal, and a positive number if buf6 > buf7
+// console.log(Boolean(Buffer.compare(buf6, buf7)));      // Compare buf6 and buf7, returns a negative number if buf6 < buf7, 0 if they are equal, and a positive number if buf6 > buf7
 
-const buf8 = Buffer.alloc(10);
-buf7.copy(buf8);                                       // Copy the contents of buf7 into buf8, starting at the beginning of buf8
-console.log(buf8.toString());
+// const buf8 = Buffer.alloc(10);
+// buf7.copy(buf8);                                       // Copy the contents of buf7 into buf8, starting at the beginning of buf8
+// console.log(buf8.toString());
 
 
-const hexbuff = Buffer.from("48656c6c6f20576f726c6421", "hex");  // Create a buffer from a hexadecimal string
-console.log(hexbuff.toString());                   // Convert the buffer to a string using UTF-8 encoding
+// const hexbuff = Buffer.from("48656c6c6f20576f726c6421", "hex");  // Create a buffer from a hexadecimal string
+// console.log(hexbuff.toString());                   // Convert the buffer to a string using UTF-8 encoding
 
-const base64Buffer = Buffer.from('SGVsbG8=', 'base64');     // Create a buffer from a Base64-encoded string
-console.log(base64Buffer.toString());
+// const base64Buffer = Buffer.from('SGVsbG8=', 'base64');     // Create a buffer from a Base64-encoded string
+// console.log(base64Buffer.toString());
 
-const buf9 = Buffer.from("Hello World");
-console.log(buf9.includes("World"));                   // Check if buf9 includes the string "World"
-console.log(buf9.indexOf("World"));                    // Get the index of the first occurrence of "World" in buf9
-console.log(buf9.lastIndexOf("o"));                   // Get the index of the last occurrence of "o" in buf9
+// const buf9 = Buffer.from("Hello World");
+// console.log(buf9.includes("World"));                   // Check if buf9 includes the string "World"
+// console.log(buf9.indexOf("World"));                    // Get the index of the first occurrence of "World" in buf9
+// console.log(buf9.lastIndexOf("o"));                   // Get the index of the last occurrence of "o" in buf9
 
     // Buffer AND Stream
 
-const { Transform } = require("stream");
+// const { Transform } = require("stream");
 
-const 
+// // create a transform stream that process data in chinks and converts it to uppercase
+// const transformStream = new Transform({
+//         transform(chunk, encoding, callback){
+//                 //process each chunk (which is a Buffer)
+//                 const processed = chunk.toString().toUpperCase();
+//                 this.push(Buffer.from(processed));
+//                 callback();
+//         }
+// })
+// const readableStream = fs.createReadStream("index.txt");
+// const writableStream = fs.createWriteStream("output.txt");
+
+// // process the file in chunk
+// readableStream.pipe(transformStream).pipe(writableStream);
+
+const buffer = Buffer.from ("Hello! Vivek");
+
+fs.writeFile("buffer.txt", buffer, (err, data)=>{
+        if(err) throw error;
+        console.log("buffer.txt file creation Successfully");
+
+        fs.readFile("buffer.txt", 'r', (err, fd)=>{
+                if(err) throw err;
+                console.log("Byte data: ", fd);
+                console.log("toStringData: ", fd.toString());
+                
+                const buf = Buffer.alloc(5);
+
+                fs.read()
+        })
+})
