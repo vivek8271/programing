@@ -102,7 +102,7 @@ const fs = require('fs');
 
 
 
-        //  Duplex and Transform Streams
+//  Duplex and Transform Streams
 
 // const net = require("net");
 // const server = net.createServer((socket)=>{
@@ -120,7 +120,7 @@ const fs = require('fs');
 // })
 
 
-        //  Buffer
+//  Buffer
 
 // const buf = Buffer.from("Hello World");
 // console.log(buf.toString());
@@ -146,17 +146,17 @@ const fs = require('fs');
 
 // console.log(buf5);
 
-const buf6 = Buffer.alloc(11);                  // Create a buffer of size 11 bytes
-buf6.write("hello");
-console.log(buf6.toString());                   // Convert the entire buffer to a string using UTF-8 encoding
-buf6[5]=44;
-buf6[6]=32;
-console.log(buf6);
-buf6.write("Node", 7);                          // Write "Node" starting at index 7
-console.log(buf6.toString());                   // Convert the entire buffer to a string using UTF-8 encoding
+// const buf6 = Buffer.alloc(11);                  // Create a buffer of size 11 bytes
+// buf6.write("hello");
+// console.log(buf6.toString());                   // Convert the entire buffer to a string using UTF-8 encoding
+// buf6[5] = 44;
+// buf6[6] = 32;
+// console.log(buf6);
+// buf6.write("Node", 7);                          // Write "Node" starting at index 7
+// console.log(buf6.toString());                   // Convert the entire buffer to a string using UTF-8 encoding
 
-console.log(buf6.toString('utf8', 0, 5));       // Convert the first 5 bytes to a string using UTF-8 encoding
-console.log(String.fromCharCode(buf6[0]));      // Convert the first byte to a character using String.fromCharCode
+// console.log(buf6.toString('utf8', 0, 5));       // Convert the first 5 bytes to a string using UTF-8 encoding
+// console.log(String.fromCharCode(buf6[0]));      // Convert the first byte to a character using String.fromCharCode
 
 // let str = "";
 // for(const byte of buf6){
@@ -185,7 +185,7 @@ console.log(String.fromCharCode(buf6[0]));      // Convert the first byte to a c
 // console.log(buf9.indexOf("World"));                    // Get the index of the first occurrence of "World" in buf9
 // console.log(buf9.lastIndexOf("o"));                   // Get the index of the last occurrence of "o" in buf9
 
-    // Buffer AND Stream
+// Buffer AND Stream
 
 // const { Transform } = require("stream");
 
@@ -204,19 +204,113 @@ console.log(String.fromCharCode(buf6[0]));      // Convert the first byte to a c
 // // process the file in chunk
 // readableStream.pipe(transformStream).pipe(writableStream);
 
-const buffer = Buffer.from ("Hello! Vivek");
+// const buffer = Buffer.from ("Hello! Vivek");
 
-fs.writeFile("buffer.txt", buffer, (err, data)=>{
-        if(err) throw error;
-        console.log("buffer.txt file creation Successfully");
+// fs.writeFile("buffer.txt", buffer, (err, data)=>{
+//         if(err) throw error;
+//         console.log("buffer.txt file creation Successfully");
 
-        fs.readFile("buffer.txt", 'r', (err, fd)=>{
-                if(err) throw err;
-                console.log("Byte data: ", fd);
-                console.log("toStringData: ", fd.toString());
-                
-                const buf = Buffer.alloc(5);
+//         fs.readFile("buffer.txt", (err, fd)=>{
+//                 if(err) throw err;
+//                 console.log("Byte data: ", fd);
+//                 console.log("toStringData: ", fd.toString());
 
-                fs.read()
-        })
-})
+//                 const buf = Buffer.alloc(5);
+//                 fs.open("buffer.txt", "r", (err, fd)=>{
+//                         if(err) throw err;
+//                         console.log("File descriptor: ", fd);
+//                         fs.read(fd, buf, 0, 5, 0, (err, bytesRead)=>{
+//                                 if(err) throw err;
+//                                 console.log("Bytes read: ", bytesRead);
+//                                 console.log("Buffer content: ", buf.toString());
+//                                 fs.close(fd, (err)=>{
+//                                         if(err) throw err;
+//                                         console.log("File closed successfully");
+//                                 })
+//                         })
+//                 })
+//         })
+// })
+
+// class BufferPool {
+//         constructor(bufferSize = 1024, poolSize = 100) {
+//                 this.bufferSize = bufferSize;
+//                 this.pool = Array(poolSize).fill().map(() => Buffer.alloc(bufferSize));
+//                 this.used = Array(poolSize).fill(false);
+//         }
+//         get(){
+//                 const index = this.used.indexOf(false);
+//                 if(index ===-1){
+//                         console.log("pool full");
+//                         return Buffer.alloc(this.bufferSize);
+//                 }
+//                 this.used[index]= true;
+//                 return this.pool[index];
+//         }
+        
+//         release(buffer){
+//                 const index = this.pool.indexOf(buffer);
+//                 if(index!==-1){
+//                         buffer.fill(0);
+//                         this.used[index]=false;
+//                 }
+//         }
+// }
+// const pool = new BufferPool(10, 3);
+
+// const buf1 = pool.get();
+// const buf2 = pool.get();
+// const buf3 = pool.get();
+// const buf4 = pool.get();
+
+// buf1.write("Hello");
+// console.log(buf1.toString());
+
+// pool.release(buf1);
+
+// const buf5 = pool.get();
+// console.log(buf5.toString());
+
+
+const crypto = require("crypto");
+
+// const pass = hash.createHash("sha256").update("vivek").digest("");
+// console.log(pass);
+// console.log(hash);
+// function hashPassword(password) {
+//         const salt = crypto.randomBytes(16).toString("hex");
+//         const hash = crypto.scryptSync(password, salt, 64).toString("hex");
+//         return {salt, hash};
+// }
+
+// function verifyPassword(password, salt, hash) {
+//         const hashToVerify = crypto.scryptSync(password, salt, 64).toString("hex");
+//         return hash===hashToVerify;
+// }
+
+// const password = "vivek";
+// const {salt, hash} = hashPassword(password);
+// console.log("Salt:", salt);
+// console.log("Hash:", hash);
+
+// const isValid = verifyPassword(password, salt, hash);
+// console.log("Is valid password:", isValid);
+
+
+function createSignature(message, key){
+        const hmac = crypto.createHmac("sha256", key);
+        hmac.update(message);
+        return hmac.digest("hex");
+}
+function verifySignature(message, key, signature){
+        const expectedSignature = createSignature(message, key);
+        return crypto.timingSafeEqual(Buffer.from(signature, "hex"), Buffer.from(expectedSignature, "hex"));
+}
+
+const message = "Hello, this is a secret message!";
+const key = "my_secret_key";
+const signature = createSignature(message, key);
+console.log("Signature:", signature);
+
+const isValidSignature = verifySignature(message, key, signature);
+console.log("Is valid signature:", isValidSignature);
