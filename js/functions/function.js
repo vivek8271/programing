@@ -59,3 +59,4 @@
 
 // const double = multiply.bind(3, 2);
 // console.log(double(4));
+

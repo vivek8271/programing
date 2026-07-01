@@ -247,7 +247,7 @@ const fs = require('fs');
 //                 this.used[index]= true;
 //                 return this.pool[index];
 //         }
-        
+
 //         release(buffer){
 //                 const index = this.pool.indexOf(buffer);
 //                 if(index!==-1){
@@ -297,20 +297,38 @@ const crypto = require("crypto");
 // console.log("Is valid password:", isValid);
 
 
-function createSignature(message, key){
-        const hmac = crypto.createHmac("sha256", key);
-        hmac.update(message);
-        return hmac.digest("hex");
-}
-function verifySignature(message, key, signature){
-        const expectedSignature = createSignature(message, key);
-        return crypto.timingSafeEqual(Buffer.from(signature, "hex"), Buffer.from(expectedSignature, "hex"));
-}
+// function createSignature(message, key){
+//         const hmac = crypto.createHmac("sha256", key);
+//         hmac.update(message);
+//         return hmac.digest("hex");
+// }
+// function verifySignature(message, key, signature){
+//         const expectedSignature = createSignature(message, key);
+//         return crypto.timingSafeEqual(Buffer.from(signature, "hex"), Buffer.from(expectedSignature, "hex"));
+// }
 
-const message = "Hello, this is a secret message!";
-const key = "my_secret_key";
-const signature = createSignature(message, key);
-console.log("Signature:", signature);
+// const message = "Hello, this is a secret message!";
+// const key = "my_secret_key";
+// const signature = createSignature(message, key);
+// console.log("Signature:", signature);
 
-const isValidSignature = verifySignature(message, key, signature);
-console.log("Is valid signature:", isValidSignature);
+// const isValidSignature = verifySignature(message, key, signature);
+// console.log("Is valid signature:", isValidSignature);
+
+const stream = require("stream");
+// const fs = require("fs");
+const readableStream = fs.createReadStream("index.txt", {
+        encoding: "utf-8",
+        highWaterMark: 64 * 1024
+})
+
+readableStream.on("data", (chunk) => {
+        const binaryString = chunk.replace(/\s+/g, "");
+        const bytes = binaryString.match(/.{1,8}/g);
+
+        if (bytes) {
+                const buffer = Buffer.from(bytes.map(b => parseInt(b, 2)));
+                console.log(buffer.toString("utf-8"));
+        }
+        // console.log(chunk)
+})

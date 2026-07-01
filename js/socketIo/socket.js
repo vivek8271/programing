@@ -22,11 +22,11 @@ io.on('connection', (socket) => {
   })
 })
 
-console.log('Socket.IO server is running');
+// console.log('Socket.IO server is running');
 app.get('/', (req, res) => {
   // console.log('Received a GET request at /');
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
-  res.send(`<h1>Socket.io running</h1>`)
+  // res.send(`<h1>Socket.io running</h1>`)
 })
 
-server.listen(8080, () => console.log('Server is running on port 8080'));
+server.listen(8000, () => console.log('Server is running on port 8080'));
